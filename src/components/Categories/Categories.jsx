@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCategory, useFilter } from "../../Context";
 import "./Categories.css";
+import { BACKEND_URL } from "../../config/config";
 
 export const Categories = () => {
   const [categories, setCategories] = useState([]);
@@ -29,7 +30,7 @@ export const Categories = () => {
     (async () => {
       try {
         const { data } = await axios.get(
-          "https://breeze-travel-backend.onrender.com/api/category"
+          `${BACKEND_URL}/category`
         );
         const categoriesToShow = data.slice(
           numberOfCategoryToShow + 10 > data.length ? data.length - 10 : numberOfCategoryToShow,

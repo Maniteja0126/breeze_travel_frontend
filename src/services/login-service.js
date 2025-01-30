@@ -1,16 +1,14 @@
 import axios from "axios";
+import { BACKEND_URL } from "../config/config";
 
 export const loginHandler = async (number, password, setAlert) => {
   try {
     const {
       data: { accessToken, username },
-    } = await axios.post(
-      "https://breeze-travel-backend.onrender.com/api/auth/login",
-      {
-        number: number,
-        password: password,
-      }
-    );
+    } = await axios.post(`${BACKEND_URL}/auth/login`, {
+      number: number,
+      password: password,
+    });
     console.log("Logged IN");
     console.log({ accessToken, username });
     localStorage.setItem("token", accessToken);
@@ -18,8 +16,8 @@ export const loginHandler = async (number, password, setAlert) => {
     setAlert({
       open: true,
       message: "Login Successful!",
-      type: "success"
-    })
+      type: "success",
+    });
     return { accessToken, username };
   } catch (err) {
     console.log("unable to login");

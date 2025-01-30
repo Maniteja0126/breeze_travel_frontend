@@ -13,6 +13,7 @@ import {
   Alert
 } from "../../components";
 import "./SingleHotel.css";
+import { BACKEND_URL } from "../../config/config";
 
 export const SingleHotel = () => {
   const { id } = useParams();
@@ -26,7 +27,7 @@ export const SingleHotel = () => {
     (async () => {
       try {
         const { data } = await axios.get(
-          `https://breeze-travel-backend.onrender.com/api/hotels/${id}`
+          `${BACKEND_URL}/hotels/${id}`
         );
         setSingleHotel(data);
       } catch (err) {

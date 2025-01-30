@@ -4,6 +4,7 @@ import { useDate, useHotel } from "../../Context";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 import "./Payment.css";
+import { BACKEND_URL, RAZORPAY_KEY_ID, RAZORPAY_URL } from "../../config/config";
 
 export const Payment = () => {
   const params = useParams();
@@ -26,7 +27,7 @@ export const Payment = () => {
     (async () => {
       try {
         const { data } = await axios.get(
-          `https://breeze-travel-backend.onrender.com/api/hotels/${id}`
+          `${BACKEND_URL}/hotels/${id}`
         );
         setSingleHotel(data);
       } catch (err) {
@@ -51,14 +52,14 @@ export const Payment = () => {
 
   const handleConfirmBookingClick = async () => {
     const response = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
+      RAZORPAY_URL
     );
     if (!response) {
       console.log({ message: "Razorpay SDK failed to load" });
     }
 
     const options = {
-      key: "rzp_test_etSbPEEHMNWEYQ",
+      key: RAZORPAY_KEY_ID,
       amount: totalPayableAmount * 100,
       currency: "INR",
       name: "TouristHeaven",

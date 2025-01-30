@@ -1,9 +1,10 @@
 import axios from "axios";
+import { BACKEND_URL } from "../config/config";
 
 export const signupHandler = async (username, number, email, password, setAlert) => {
   try {
     const data = await axios.post(
-      "https://breeze-travel-backend.onrender.com/api/auth/register",
+      `${BACKEND_URL}/auth/register`,
       {
         username: username,
         number: number,

@@ -20,6 +20,7 @@ import {
   getHotelsByRatings,
   getHotelsByCancelation,
 } from "../../utils";
+import { BACKEND_URL } from "../../config/config";
 
 export const Home = () => {
   const [hasMore, setHasMore] = useState(true);
@@ -46,7 +47,7 @@ export const Home = () => {
     (async () => {
       try {
         const { data } = await axios.get(
-          `https://breeze-travel-backend.onrender.com/api/hotels?category=${hotelCategory}`
+          `${BACKEND_URL}/hotels?category=${hotelCategory}`
         );
 
         setTestData(data);

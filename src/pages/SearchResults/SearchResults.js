@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { HotelCard, Navbar, Alert } from "../../components";
 import { useDate, useCategory, useAlert } from "../../Context";
 import axios from "axios";
+import { BACKEND_URL } from "../../config/config";
 
 export const SearchResults = () => {
   const { destination } = useDate();
@@ -13,7 +14,7 @@ export const SearchResults = () => {
     (async () => {
       try {
         const { data } = await axios.get(
-          `https://breeze-travel-backend.onrender.com/api/hotels?category=${hotelCategory}`
+          `${BACKEND_URL}/hotels?category=${hotelCategory}`
         );
         setHotels(data);
       } catch (err) {
